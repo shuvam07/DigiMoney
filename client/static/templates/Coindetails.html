@@ -2,49 +2,51 @@
    <head>
       <meta charset="utf-8" class="next-head">
       <meta name="viewport" content="width=device-width, initial-scale=1" class="next-head">
-      <link rel="stylesheet" href="static/css/bootstrap.css" class="next-head">
-      <link rel="stylesheet" href="static/css/main.css" class="next-head">
-      <link rel="stylesheet" href="static/css/font-awesome.min.css" class="next-head">
+      <link rel="stylesheet" href="../static/css/bootstrap.css" class="next-head">
+      <link rel="stylesheet" href="../static/css/main.css">
+      <link rel="stylesheet" href="../static/css/font-awesome.min.css" class="next-head">
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
+
       <link href="https://fonts.googleapis.com/css?family=Bellefair|Montserrat|Lato" rel="stylesheet" class="next-head">
       <title class="next-head">DigiMoney | Cryptocoin price index and market cap</title>
       
    </head>
    <body>
-      <div class="container col-md-9">
-          <div class="row" >
-              <div class="col-md-10">
-                  <div class="row">
-                    <div class="col-md-3 crypto-info-titles">Name</div>
-                    <div class="col-md-3 crypto-info-titles">Ticker</div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3 crypto-info-values">{{name}}</div>
-                    <div class="col-md-3 crypto-info-values">{{ticker}}</div>
-                  </div>
-             </div>
+      <div id="details-view" class="col-md-9">
+        <div class="container crypto-info-wrapper">
+          <div class="col-md-10">
+              <div class="row" >
+                  <div class="col-md-3 crypto-info-titles">Name</div>
+                  <div class="col-md-3 crypto-info-titles">Ticker</div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 crypto-info-values">{{name}}</div>
+                <div class="col-md-3 crypto-info-values">{{ticker}}</div>
+              </div>
+          </div>
         </div>
-      </div>
-      <div class="tradetable tradetable-mob">
-        <table class="table" class="tablesorter tablesorter-default" data-test="test">
-           <thead>
-              <tr class="tablesorter-headerRow">
-                  <th class="price header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">price(USD)</div></th>
-                  <th class="txVolume header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">txVolume(USD)</div></th>
-                  <!-- <th class="txCount header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">txCount</div></th> -->
-                  <th class="marketCap header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">marketCap(USD)</div></th>
-              </tr>
-           </thead>
-           <tbody class="details-crypto">
-              {{#each rows}}
-                 <tr class="">
-                    <td class="price"><h1><span>{{this.price}}</span></h1></td>
-                    <td class="txVolume"><h1><span>{{this.txVolume}}</span></h1></td>
-                    <!-- <td class="txCount"><h1><span>{{this.Count}}</span></h1></td> -->
-                    <td class="marketCap"><h1><span>{{this.marketCap}}</span></h1></td>
-                  </tr>
-              {{/each}}
-           </tbody>
-        </table>
+        <div class="historicalData">
+          <table class="table" class="tablesorter tablesorter-default" data-test="test">
+             <thead>
+                <tr class="tablesorter-headerRow">
+                    <th class="price header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">price(USD)</div></th>
+                    <th class="txVolume header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">txVolume(USD)</div></th>
+                    <!-- <th class="txCount header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">txCount</div></th> -->
+                    <th class="marketCap header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">marketCap(USD)</div></th>
+                </tr>
+             </thead>
+             <tbody class="details-crypto">
+                {{#each rows}}
+                   <tr class="">
+                      <td class="price"><h1><span>{{this.price}}</span></h1></td>
+                      <td class="txVolume"><h1><span>{{this.txVolume}}</span></h1></td>
+                      <!-- <td class="txCount"><h1><span>{{this.Count}}</span></h1></td> -->
+                      <td class="marketCap"><h1><span>{{this.marketCap}}</span></h1></td>
+                    </tr>
+                {{/each}}
+             </tbody>
+          </table>
+        </div>
       </div>
 
    </body>

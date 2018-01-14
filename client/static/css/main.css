@@ -274,3 +274,8 @@ tbody.details-crypto {
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: hidden;
 }
+
+/*.historicalData {
+  overflow: auto;
+  width:320px; height:60px;
+}*/
