@@ -1,0 +1,64 @@
+Crypto Watcher
+[Problem Statement]
+
+You need to develop a web application for viewing crypto-currency prices. A data dump is provided which contains the cryptocurrency-related historical data up to yesterday. Also provided is a third party API that exposes their real-time data. Your web app should display historical as well as current data in tables.
+
+Note on terminology: in the data dump, “txVolume” stands for transaction volume, i.e., the total crypto-currency bought and sold on that day.
+
+[Minimum requirements] [ 70% weightage ]
+
+On Back End:
+
+— Load all cryptocurrencies and their historical prices + tx volume from the provided dump files and store it in the database. There are 4 currencies: BTC (Bitcoin), DOGE (Dogecoin), ETH (Ethereum), and LTC (Litecoin).
+
+— Fetch data (price + tx volume) from the third party API provided for cryptocurrencies which you have stored in the database. Only the latest data is needed for every currency for the current day.
+
+— Write a scalable backend which exposes REST APIs with all the cryptocurrency data (price in US Dollars and tx volume for every currency).
+
+On Front End:
+
+— Index page: Your frontend should be able to list all available cryptocurrencies as well as their last known price from the database.
+
+— Single currency details page: Your frontend should display current as well as historical data (price in USD + tx volume) for a given currency. The current day’s values should be auto-refreshed on the UI every 2 minutes. (note: auto-refresh is only needed for the details page, not the index page).
+
+[Bonus features] [ 30% weightage ]
+
+These are additional features you should attempt only if you’ve completed the minimum requirements above. Completing bonus features will add to your score.
+
+— [ 20% weightage ] Provide a Dockerfile that can be used to easily deploy your application in a container. See this link as an example for Python WSGI apps:
+
+https://www.digitalocean.com/community/tutorials/docker-explained-how-to-containerize-python-web-applications
+
+— [ 10% weightage ] Have a search box that can be used to filter currencies on the index page.
+
+[Guidelines]
+
+— Make appropriate architectural choices for your application with a focus on extensibility, performance, and clean design. These will also factor into scoring.
+
+— The primary focus is on the design and development of the backend; your frontend should be simple and functional.
+
+— Zip all your source code, executables(if any, viz. War file), deployment instructions, screenshots and upload them. Also, add your Dockerfile(if present) to the archive itself.
+
+[Resources]
+
+Data dump: http://hck.re/OlbWr7
+
+Cryptocurrency API :
+
+https://www.alphavantage.co/documentation/#digital-currency
+
+How to call this API :
+
+https://www.alphavantage.co/documentation/
+
+[About API]
+
+The cryptocurrency API is a third party free API. You can get the API key from the provided URL. The documentation explains very clearly how to call this API.
+
+Note: The API call frequency should not exceed ~1 call per second to avoid overloading the server.
+
+Example API call:
+
+https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_INTRADAY&symbol=BTC&market=CNY&apikey=demo
+
+(NOTE: this is the price of Bitcoin in Chinese Yuans, not US Dollars. To get the price in USD, replace market=CNY with market=USD)

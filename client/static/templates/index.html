@@ -1,0 +1,50 @@
+<html>
+   <head>
+      <meta charset="utf-8" class="next-head">
+      <meta name="viewport" content="width=device-width, initial-scale=1" class="next-head">
+      <link rel="stylesheet" href="static/css/bootstrap.css" class="next-head">
+      <link rel="stylesheet" href="static/css/main.css" class="next-head">
+      <link rel="stylesheet" href="static/css/font-awesome.min.css" class="next-head">
+      <link href="https://fonts.googleapis.com/css?family=Bellefair|Montserrat|Lato" rel="stylesheet" class="next-head">
+
+      <title class="next-head">DigiMoney | Cryptocoin price index and market cap</title>
+      
+   </head>
+   <body>
+      <div class="container">
+         <div class="brand-wrapper">
+            <div class="brand-picture"></div>
+            <span class="brand-name">DigiMoney</span>
+
+         </div>
+         <div class="search-wrapper">
+          <input type="text" placeholder="Search: Cryptocoin" value="">
+            <i class="fa fa-search" aria-hidden="true">
+          </i>
+         </div>
+
+         <div class="tradetable tradetable-mob">
+            <table id="myTable" class="tablesorter tablesorter-default" data-test="test">
+               <thead>
+                  <tr class="tablesorter-headerRow">
+                      <th class="rank headerrank header-off tablesorter-header" data-column="0" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">#</div></th>
+                      <th class="name header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">Name</div></th>
+                      <th class="price header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">price(USD)</div></th>
+                      <!-- <th class="txVolume header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">txVolume(USD)</div></th>
+                      <th class="txCount header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">txCount</div></th>
+                      <th class="marketCap header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">marketCap(USD)</div></th>
+                      <th class="price header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">price(USD)</div></th>
+                      <th class="exchangeVolume header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">exchangeVolume(USD)</div></th>
+                      <th class="generatedCoins header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">generatedCoins</div></th>
+                      <th class="fees header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">fees</div></th> -->
+                  </tr>
+               </thead>
+               <tbody>
+                  {{{cryptos data}}}
+               </tbody>
+            </table>
+
+      </div>
+      <script type="text/javascript" href="./js/index.js"></script>
+   </body>
+</html>
