@@ -1,5 +1,5 @@
 body {
-	background-image: url("/static/img/bg.jpg");
+	/*background-image: url("/static/img/bg.jpg");*/
 	background-size: cover;
 	background-position: center;
 	font-family: 'Lato', sans-serif;
@@ -262,4 +262,9 @@ a:-webkit-any-link {
     /*color: -webkit-link;*/
     cursor: pointer;
     text-decoration: underline;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
 }

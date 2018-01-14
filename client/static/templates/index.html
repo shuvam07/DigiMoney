@@ -29,6 +29,7 @@
                   <tr class="tablesorter-headerRow">
                       <th class="rank headerrank header-off tablesorter-header" data-column="0" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">#</div></th>
                       <th class="name header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">Name</div></th>
+                      <th class="ticker header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">Ticker</div></th>
                       <th class="price header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">price(USD)</div></th>
                       <!-- <th class="txVolume header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">txVolume(USD)</div></th>
                       <th class="txCount header-off tablesorter-header" data-column="1" tabindex="0" unselectable="on" style="user-select: none;"><div class="tablesorter-header-inner">txCount</div></th>
@@ -40,7 +41,14 @@
                   </tr>
                </thead>
                <tbody>
-                  {{{cryptos data}}}
+                  {{#each this}}
+                     <tr class={{this.cryptoName}}>
+                        <td class="rank"><h1><span>{{inc @index}}</span></h1></td>
+                        <td class-"name"><a href="/coin/"+{{this.cryptoName}}><h1><span>{{this.cryptoName}}</span></h1></a></td>
+                        <td class-"ticker"><h1><span>{{this.cryptoTicker}}</span></h1></a></td>
+                        <td class="price"><h1><span>{{this.price}}</span></h1></td>
+                      </tr>
+                  {{/each}}
                </tbody>
             </table>
 
