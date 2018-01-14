@@ -98,49 +98,40 @@ async function fetchAsync () {
 	return "";
 }
 
-async function fetchDbQuery() {
-	let currentData =[99,33,5,66]
-	var sql= 'SELECT * from crypto_info'
-	db.get(sql,(err,rows)=>{
-		if(err)
-				return console.error(err.message);
-		else{
-			rows=json(rows);
-			for(int i=0;i<rows.length;i++){
-
+async function fetchQuery(cryptoFile,resolve,reject){
+	var sql = "SELECT PRICE,MAX(DATE) FROM crypto_info WHERE NAME LIKE '"+cryptoFile+"' ORDER BY DATE";
+	db.get(sql,(err,row)=>{
+			if(err){
+				reject(err.message);
 			}
-		}
-	})
-	// for(var i=0;i<cryptoName.length;i++){
-	// 	var sql = "SELECT PRICE,MAX(DATE) FROM crypto_info WHERE NAME LIKE '"+cryptoName[i]+"' ORDER BY DATE";
-	// 	// console.log(sql)
-	// 	await db.get(sql,(err,row)=>{
-	// 		if(err){
-	// 			return console.error(err.message);
-	// 		}
-	// 		else{
-				
-	// 			currentData[i]=row.price;
-				
-	// 		}
-	// 	});
-	// }
-	var jsonArr = []
-	for(var i=0;i<currentData.length;i++){
-		jsonArr.push({
-			cryptoTicker: cryptoTicker[i],
-			cryptoName: cryptoName[i],
-			price: currentData[i]
-		});
-	}
-	return jsonArr;
-	
+			else
+				resolve(row.price);
+	});
 }
+
+async function fetchDbQuery() {
+	var promises = []
+	for(var i=0;i<cryptoName.length;i++){
+		promises.push(new Promise(function(resolve, reject) {
+	      fetchQuery(cryptoName[i], resolve, reject);
+	    }));
+	}
+	return Promise.all(promises);
+}
+
 app.get('/', function(req, res){
 	fetchDbQuery()
-		.then(jsonArr => {
+		.then(currentData => {
 			let indexTemplate = fs.readFileSync(path.resolve(__dirname+'/../client/static/templates/index.html'),"utf8");
 			let compiledTemplate = hbs.compile(indexTemplate);
+			var jsonArr = []
+			for(var i=0;i<currentData.length;i++){
+				jsonArr.push({
+					cryptoTicker: cryptoTicker[i],
+					cryptoName: cryptoName[i],
+					price: currentData[i]
+				});
+			}
 			let result = compiledTemplate(jsonArr);
 			// console.log(result);
 			res.send(result);
@@ -148,6 +139,45 @@ app.get('/', function(req, res){
 		.catch(reason => console.log(reason.message))
 });
 
+async function getHistoricalData(crypto){
+	var sql= "SELECT price,txvolume,marketCap FROM crypto_info WHERE NAME LIKE '"+crypto+"'";
+	return new Promise(function(resolve,reject){
+		db.all(sql,(err,rows)=>{
+			if(err)
+				reject(err.message);
+			else{
+				// console.log(rows)
+				return resolve(rows);
+			}
+		});
+	});
+	
+}
+
+app.get('/coin/:crypto',function(req,res){
+	
+	getHistoricalData(req.params.crypto)
+		.then(data => {
+			// console.log(rows[0])
+			let ticker = "";
+			let indexTemplate = fs.readFileSync(path.resolve(__dirname+'/../client/static/templates/Coindetails.html'),"utf8");
+			let compiledTemplate = hbs.compile(indexTemplate);
+			for(let i=0;i<cryptoName.length;i++){
+				if(cryptoName[i]==req.params.crypto){
+					ticker=cryptoTicker[i];
+				}
+			}
+			var jsonArr = {
+				name:req.params.crypto,
+				ticker:ticker,
+				rows:data
+			}
+			console.log(jsonArr);
+			let result = compiledTemplate(jsonArr);
+			res.send(result);
+		})
+		.catch(reason => console.log(reason.message))
+});
 app.listen(3000, function(){
 	console.log('listening on port 3000 ..');
 })

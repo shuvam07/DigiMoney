@@ -18,7 +18,7 @@
 
          </div>
          <div class="search-wrapper">
-          <input type="text" placeholder="Search: Cryptocoin" value="">
+          <input type="text" placeholder="Search: Cryptocoin" value="" onkeydown="searchCoin()">
             <i class="fa fa-search" aria-hidden="true">
           </i>
          </div>
@@ -44,7 +44,7 @@
                   {{#each this}}
                      <tr class={{this.cryptoName}}>
                         <td class="rank"><h1><span>{{inc @index}}</span></h1></td>
-                        <td class-"name"><a href="/coin/"+{{this.cryptoName}}><h1><span>{{this.cryptoName}}</span></h1></a></td>
+                        <td class-"name"><a href="/coin/{{this.cryptoName}}"><h1><span>{{this.cryptoName}}</span></h1></a></td>
                         <td class-"ticker"><h1><span>{{this.cryptoTicker}}</span></h1></a></td>
                         <td class="price"><h1><span>{{this.price}}</span></h1></td>
                       </tr>
