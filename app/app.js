@@ -26,24 +26,25 @@ const cryptoName = ["Bitcoin","Dogecoin","Ethereum","Litecoin"]
 var db = new sqlite3.Database('archives.db');
 
 
-// db.serialize(function () {
-//   db.run("CREATE TABLE if not exists crypto_info (name date txVolume txCount marketCap price exchangeVolume generatedCoins fees)");
-//   for(let i=0;i<cryptoFiles.length;i++){
-//   	csv().fromFile(cryptoFiles[i])
-// 	  .on('csv',(csvRow)=>{
-// 	    stmt = "INSERT INTO crypto_info VALUES (" + cryptoName[i] + "," + csvRow[0] + "," + csvRow[1] + "," + csvRow[2] + "," + csvRow[3] + "," + csvRow[4] + "," + csvRow[5] + "," + csvRow[6] + "," + csvRow[7] +")"
-// 	    // console.log(stmt)
-// 	    db.run(stmt)
-// 	  })
-// 	  .on('done', (error) => {
-// 	    console.log('---->  populating crypto tables done.')
-// 	  })
-//   }
-// })
+db.serialize(function () {
+  db.run("CREATE TABLE if not exists crypto_info (name date txVolume txCount marketCap price exchangeVolume generatedCoins fees)");
+  for(let i=0;i<cryptoFiles.length;i++){
+  	csv().fromFile(cryptoFiles[i])
+	  .on('csv',(csvRow)=>{
+	    stmt = "INSERT INTO crypto_info VALUES ('" + cryptoName[i] + "'," + csvRow[0] + "," + csvRow[1] + "," + csvRow[2] + "," + csvRow[3] + "," + csvRow[4] + "," + csvRow[5] + "," + csvRow[6] + "," + csvRow[7] +")"
+	    console.log(stmt)
+	    db.run(stmt)
+	  })
+	  .on('done', (error) => {
+	    console.log('---->  populating crypto tables done.')
+	  })
+  }
+})
 
 
-hbs.registerHelper('cryptos', function(cryptoPrice) {
+hbs.registerHelper('cryptos', function(data) {
 	// console.log(cryptos);
+	cryptoPrice = data.data;
 	var cryptosFound = "";
 	// var cryptoNotFound = "<div class=\"crypto-not-found\">No cryptos found.</div>";
 	// if( cyptos==undefined || cryptos.length == 0)
@@ -103,5 +104,7 @@ app.get('/', function(req, res){
 app.listen(3000, function(){
 	console.log('listening on port 3000 ..');
 })
+
+
 
 	
